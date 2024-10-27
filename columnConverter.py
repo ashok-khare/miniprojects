@@ -10,8 +10,8 @@
 # matchingLetter(int) = chr(ord('A') + int - 1) if int != 0 || "Z" if int == 0
 # If remainder[i] == 0, quotient[i] -= 1
 
-def convertToBase26(number):
-    remainders = []
+def convertNumericColumnLabel(number):
+    letters = []
     quotient = number
 
     while (quotient != 0):
@@ -19,23 +19,13 @@ def convertToBase26(number):
         quotient = quotient // 26
         if (remainder == 0):
             quotient -= 1
-        remainders.append(remainder)
-
-    remainders.reverse()
-    return remainders
-
-def convertToLetters(columnNumber):
-    segments = convertToBase26(columnNumber)
-    letters = []
-
-    for number in segments:
-        if (number == 0):
-            letters.append("Z")
+            letters.append('Z')
         else:
-            letters.append(chr(ord("A") + number - 1))
+            letters.append(chr(ord("A") + remainder - 1))
 
+    letters.reverse()
     return "".join(letters)
 
 if __name__ == "__main__":
     for i in range(1, 703):
-        print(i, convertToLetters(i))
+        print(i, convertNumericColumnLabel(i))
